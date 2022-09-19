@@ -1,104 +1,163 @@
+
 html {
-box-sizing: border-box;
-}
-
-*, *::before, *::after{
-    box-sizing: inherit;
-    align-items: center;
-}
-
-.cardsTable {
-    width: 96%;
-    height: 700px;;
-    background-color: green;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    position:relative;
-    align-self: center;
-    justify-content: space-between;
-}
-
-.playArea {
-    width: 96%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-
-
-}
-
-.resultsArea {
-
-    width: 96%;
-    height: 100px;
-    flex: 1;
-    align-self: flex-start;
-
-
-}
-
-button{
-    position:relative;
-    width: 100px;
-    height: 30px;
-    top: 500px;
-    align-self: center;
-  
-}
-
-output{
-    position: relative;
-    width: 80%;
-    height: 25px;
-    align-self: auto;
-    top: 620px;
-    background-color: azure;
-    /* border: 2px, solid, beige; */
-}
-
-.playerOne {
+    box-sizing: border-box;
+    }
     
-    justify-content: flex-start;
-
-}
-.players {
-    display: flex;
-    min-width:45%;
-    height: 400px;
-    flex-wrap: wrap;
-    flex-direction: row;
+    *, *::before, *::after{
+        box-sizing: inherit;
+        align-items: center;
+    }
     
-
-}
-
-.covered {
-    background-color: aquamarine;
-    width: 150px;
-    height: 200px;
-    position: relative;
-    left: 200px;
-    top: 200px;
-    border:2px solid rgb(43, 40, 40);
-}
-
-.playerTwo {
+    .cardsTable {
+        width: 96%;
+        height: 700px;;
+        background-color: green;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction:row;
+        position:relative;
+        align-self: center;
+        justify-content: space-between;
+    }
     
-    justify-content: flex-end;
-
-}
-.shown {
+    .playArea {
+        width: 96%;
+        display: flex;
+        flex-direction:inherit;
+        justify-content: space-between;
     
-    background-color: blanchedalmond;
-    width: 150px;
-    height: 200px;
-    left: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border:2px solid red;
-    font-size: 30px;
-    /* text-align: center; */
-}
+    
+    
+    }
+    
+    .resultsArea {
+    
+        width: 96%;
+        height: 100px;
+        flex: 1;
+        align-self: flex-start;
+    
+    
+    }
+    
+    button{
+        display: flex;
+        width: 100px;
+        height: 30px;
+        left:-44%;
+        border: 2px solid black;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+        user-select: none;
+        
+      
+    }
+    .text {
+        position: relative;
+        background-color: aliceblue;
+        width: 300px;
+        left: 44%;
+        height: 30px;
+        line-height: 28px;
+        top:-40px;
+        text-align: center;
+    }
+    
+    output{
+        position: relative;
+        width: 80%;
+        height: 25px;
+        align-self: auto;
+        top: 620px;
+        background-color: azure;
+        /* border: 2px, solid, beige; */
+    }
+    
+    .playerOne, .playerOnecovered {
+        
+        justify-content: center;
+    
+    }
 
+    .players {
+        display: flex;
+        min-width:30%;
+        height: 350px;
+        
+        
+    
+    }
+    
+    .covered {
+        background-color: aquamarine;
+        width: 150px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* left: 200px;
+        top: 200px; */
+        border:2px solid rgb(43, 40, 40);
+        user-select: none;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+
+    /* .playerOnecovered {
+        background-color: aquamarine;
+        width: 150px;
+        height: 200px;
+        position: relative;
+        left: 200px;
+        top: 200px;
+        border:2px solid rgb(43, 40, 40);
+    } */
+
+    
+    .playerTwo, .playerTwocovered{
+        
+        justify-content: center;
+    
+    }
+    .shown {
+        
+        background-color: blanchedalmond;
+        width: 150px;
+        height: 200px;
+        left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border:2px solid red;
+        font-size: 60px;
+        
+        
+        /* text-align: center; */
+    }
+    .shown.red{
+        color: red;
+        
+    }
+    .shown.black{
+        color: black;
+    }
+    .shown::before, .shown::after{
+        position: relative;
+        content: attr(data-value);
+        font-size: 16px;
+        
+    }
+
+    .shown::before{
+        top: -85px;
+        right:15px;
+    }
+
+    .shown::after{
+        top: 85px;
+        left: 15px;
+        transform: rotate(180deg);
+    }

@@ -4,59 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./css/styles.css"
     <title>Document</title>
-
-    <link rel="stylesheet" href="./css/styles.css"/>
 </head>
 <body>
-<h1>Cards War</h1>
-<!-- the playing table -->
-<section table class="cardsTable">
-    <div class="playArea">
-        <div player1 class="players playerOne"> 
-            <div cards-covered class="covered" >
-
+    <section table class="cardsTable">
+        <div class="playArea">
+            <div player1 class="players playerOne"> 
+                <div cards-covered class="covered playerOnecovered" >
+    
+                </div>
+                <div cards-open class="shown playerOneShown" >
+                    <div class="shownCard " data-value="10 ♠︎">
+                        10 ♠︎
+                    </div>
+                    
+    
+                </div>
+                <div card-at-war class=" atWar">"7 ♠︎"
+    
+                </div>
             </div>
-            <div cards-open class="shown" >
-                <div class="shownCard " data-value="10 ♠︎">
-                    10 ♠︎
+    
+            <div player2 class="players playerTwo"> 
+                <div card-at-war class=" atWar">
+    
+                </div>
+                <div cards-open class="shown playerTwoShown" >
+                   
+    
+                </div>
+                <div cards-covered class="covered playerTwocovered">
+    
                 </div>
                 
-
-            </div>
-            <div card-at-war class=" atWar">
-
             </div>
         </div>
+    
+        <div class="text"> </div>
+    
+        <button class="startPlay">Play</button>
+        
+    
+        
+    
+    
+    
+    
 
-        <div player2 class="players playerTwo"> 
-            <div cards-covered class="covered">
-
-            </div>
-            <div cards-open class="shown" >
-               
-
-            </div>
-            <div card-at-war class=" atWar">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="resultsArea">
-
-    <button>Play</button>
-    <output 
-    id="Hand winner"
-    display="text"
-    placeholder="Winner"
-    >this is my output</output>
-
-    </div>
-
-
-</section>
-
-    <script src="main.js" ></script>
+    <script src="main.js"></script>
 </body>
 </html>

@@ -1,141 +1,239 @@
-// shift the cards randomly and stor to 2 different stacks.
- let N = 52;
-//
-let cards = mycard(N);
+console.log('Hi!!!');
 
-function mycard(N){
-    var deck=[];
-    for (let i=1; i <=N; i++){
-    
-        deck.push(i);
+
+
+const play = document.querySelector(".startPlay");
+const text = document.querySelector('.text')
+const playerTwoDeck = document.querySelector(".playerTwocovered");
+const playerOneDeck = document.querySelector(".playerOnecovered");
+
+const player1Shown = document.querySelector(".playerOne");
+const player2Shown = document.querySelector(".playerTwo");
+
+
+
+function freshDeck(){
+    let deck0 =[];
+    for(let i=1; i<=52 ; i++){
+        deck0.push(i);
     }
-    return deck;
-}
-// shuffle cards
-function shuffle(arr){
-    for(let i=0; i<arr.length; i++){
-        let temp= arr[i];
-        let rand = Math.floor(Math.random()*(arr.length-3));
-        arr.splice(i,1);
-        arr.splice(rand, 0, temp);
-    }
-    return arr;
-}
-///// function to read the card number from 1 to 13 spades. 14-26 diamons, 27 to39 hearts, 40 to 52 clubs
-function cardvalue(num){
-    if(num <= 13){
-        value = num;
-        color = '♦︎';
-    } else if(14 <= num &&  num <=26){
-        value = num - 13;
-        color = '♠︎';
-    }else if(27 <= num &&  num <= 39){
-        value = num - 26;
-        color = '♥︎';
-    }else {
-        value = num - 39;
-        color = '♣︎';
-    }
-    console.log( value, color);
-    let displayvalue= 0;
-
-    if(value === 1 ){
-        displayvalue = 'A';
-    }else if(value === 11){
-        displayvalue = 'J';
-    }else if (value === 12){
-        displayvalue = 'Q';
-    }else if(value === 13){
-        displayvalue = 'K';
-    } else{
-        displayvalue = value;
-    }
-    return [shown2 = [displayvalue, color] , value];
-}
-//deckShuffle = shuffle(cards)
-// slice cards;
-
-deckone = cards.slice(0,26);
-decktwo = cards.slice(26-52);
-//
-//// assign deck to player
-
-// If stack==52 game ends; if < 52 continue.
-
-// game step shift cards from one hand to the other
-
-function show(arr){
-    console.log(arr[0]);
-}
-//
-function deckupdate(arr){
-    arr.splice(1);
-}
-//
-function shift(arr1, arr2, num){
-    let staged=[];
-    staged = arr1.slice(0,num);
-    staged;
-    let n= arr2.slice(0,num);
-    staged.push(n);
-    staged;
-    console.log(staged);
-    arr1 = arr1.slice(num)
-    arr1.push(staged);
-    arr1 =arr1.flat(2);
-    arr2 = arr2.slice(num);
-    console.log(arr1, 'array1');
-    console.log(arr2, 'Array2');
-
-}
-
-function Player({name, deck, decksize52 = false}={}){
-    this.name = name;
-    this.deck = deck;
-    this.decksize52 = decksize52;
-   
-}
-
-// const Player = function({name} = {}) {
-//     this.name = name;
-//     this.hand = [];
-//   }
-  
-//   const Game = function() {
-//     const player1 = prompt("Enter player one's name: ");
-//     const player2 = prompt("Enter player two's name: ");
-  
-//     this.player1 = new Player({name: player1});
-//     this.player2 = new Player({name: player2});
-  
-//     this.deck = new Deck();
-//   }
-  
-//   const game = new Game();
-
-//function Game({})
-
-class shown2 {
-    constructor(value, color){
-        this.color = color
-        this.value =value
-    }
-
- getHTML() {
-        const shownDiv = document.createElement('div');
-        shownDiv.InnerText = this.color;
-        shownDiv.classList.add("shown2", this.color);
-        shownDiv.dataset.value = `${this.value} ${this.color}`;
-        return shownDiv;
+  shuffle();
+function shuffle(){
+        for(let i=0; i<deck0.length; i++){
+            let temp= deck0[i];
+            let rand = Math.floor(Math.random()*(deck0.length-3));
+            deck0.splice(i,1);
+            deck0.splice(rand, 0, temp);
         }
+    
+    }
+    return deck0;
 }
-const shown = document.querySelector(".shown");
+    
 
-shown.appendChild(getHTML('kliu'))
+// Create a shuffled deck of cards;
+class Deck {
+    constructor(cards = freshDeck()){
+        this.cards = cards
+    }
+
+ }
 
 
-{/* <div class="shownCard " data-value="10 ♠︎"> */}
+ //const deck = new Deck()
 
-console.log('ABC');
-                  
+
+let player1Deck, player2Deck, gameOn=true, gameOver
+const Player = function({name}={}){
+    this.name = name;
+    this.hand = [];
+}
+
+play.addEventListener('click', () =>{
+console.log(gameOver,'playOn!!!!' ,gameOn);
+   if(gameOver) {
+    console.log('game Ended');
+     startGame();
+     return;
+    }
+    else if(gameOn) {
+        console.log('yes it is on!!!');
+        cleanBoard();
+        flipCard();
+    }
+})
+
+startGame();
+
+function startGame(){
+
+    const player1 = prompt("Enter player one's name: ");
+    const player2 = prompt("Enter player two's name: ");
+    this.player1 = new Player({name: player1});
+    this.player2 = new Player({name: player2});
+    pulledCards = 1;
+    staged=[];
+   
+
+    this.deck = new Deck();
+    
+    console.log(this.deck);
+
+    function splitDeck(){
+
+    player1Deck = deck.cards.slice(0,26);
+    player2Deck = deck.cards.slice(26-52);
+    }
+    splitDeck()
+
+    console.log(deck , player1Deck, player2Deck)
+
+    gameOver= false;
+
+}
+
+
+
+
+function shownCards(num){
+
+    ///// function to read the card number from 1 to 13 spades. 14-26 diamons, 27 to39 hearts, 40 to 52 clubs
+  
+        if(num <= 13){
+            value = num;
+            color = '♦︎';
+        } else if(14 <= num &&  num <=26){
+            value = num - 13;
+            color = '♠︎';
+        }else if(27 <= num &&  num <= 39){
+            value = num - 26;
+            color = '♥︎';
+        }else {
+            value = num - 39;
+            color = '♣︎';
+        }
+        //console.log( value, color);
+        let displayvalue= 0;
+    
+        if(value === 13 ){
+            displayvalue = 'A';
+        }else if(value === 10){
+            displayvalue = 'J';
+        }else if (value === 11){
+            displayvalue = 'Q';
+        }else if(value === 12){
+            displayvalue = 'K';
+        } else{
+            displayvalue = value+1;
+            
+        }
+        return [shown2 = [displayvalue, color] , value];
+    }
+
+
+function flipCard(){
+    gameOn = true;
+    console.log(pulledCards);
+    if(player1Deck.length < 1){
+        gameOver=true;
+        gameOn=false;
+        text.innerHTML= `GAMEOVER  ${this.player2.name}  "Wins the Game!"`;
+    } 
+    if(player2Deck.lengh < 1){
+        gameOver=true;
+        gameOn=false;
+        text.innerHTML= `GAMEOVER  ${this.player1.name}  "Wins the Game!"`;
+    }
+
+    this.player1.hand = player1Deck[pulledCards-1];
+    this.player2.hand = player2Deck[pulledCards-1];
+   let N = player2Deck.length;
+    playerOneDeck.innerText = player1Deck.length;
+    playerTwoDeck.innerText = player2Deck.length;
+    // console.log(this.player1.hand, this.player2.hand);
+    let TR1 = this.player1.hand;
+    player1Shown.appendChild(getHTML(TR1));
+    player2Shown.appendChild(getHTML());
+
+    handWinner();
+    return this.player1.hand, this.player2.hand;
+    
+}
+
+function handWinner(){
+    if(shownCards(this.player1.hand)[1]>shownCards(this.player2.hand)[1] ){
+        text.innerHTML =`${this.player1.name} + "Wins the hand!"`;
+        player1Deck.push(staged);
+        player1Deck = player1Deck.flat(2);
+        staged= [];
+        pulledCards = 1;
+        
+    } else if(shownCards(this.player2.hand)[1]>shownCards(this.player1.hand)[1]){
+        text.innerHTML = `${this.player2.name} + "Wins the hand!"`;
+        player2Deck.push(staged);
+        player2Deck = player2Deck.flat(2);
+        staged = [];
+        pulledCards = 1;
+    } else {
+        text.innerHtml = "CARDS WAR!!!!";
+        if(player1Deck.length < 4){
+            gameOver=true;
+            gameOn=false;
+            text.innerHTML= `GAMEOVER + ${this.player2.name} + "Wins the Game!"`;
+        } else if(player2Deck.lengh < 4){
+            gameOver=true;
+            gameOn=false;
+            text.innerHTML= `GAMEOVER + ${this.player1.name} + "Wins the Game!"`;
+        } else { pulledCards = 4;
+
+        }
+    }
+    return player1Deck, player2Deck;
+
+}
+
+function deckStage(){
+    
+    staged.push(player1Deck.slice(0, pulledCards));
+    console.log(staged)
+    staged.push(player2Deck.slice(0, pulledCards));
+    console.log(staged)
+    player1Deck.splice(0,pulledCards);
+    player2Deck.splice(0, pulledCards);
+
+    //staged = staged.flat();
+
+
+    console.log("Staged =",staged ,player1Deck, "player1", player2Deck);
+
+    return staged
+
+
+}
+
+function cleanBoard(){
+    deckStage();
+    
+
+
+}
+
+// class shown{
+
+//      //shownCards()
+
+
+//     function getHTML(){
+//         const shownDiv = document.createElement("div")
+//         shownDiv.innerText = shownCards[1]
+//         shownDiv.classList.add("showncard")
+//         shownDiv.dataset.value = shownCards[0] , shownCards[1]
+//         return shownDiv
+
+//     }
+// // }
+
+// {/* <div cards-open class="shown" ></div>
+// <div class="shownCard " data-value="10 ♠︎"></div> */}
+
 
