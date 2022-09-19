@@ -7,8 +7,10 @@ const text = document.querySelector('.text')
 const playerTwoDeck = document.querySelector(".playerTwocovered");
 const playerOneDeck = document.querySelector(".playerOnecovered");
 
-const player1Shown = document.querySelector(".playerOne");
-const player2Shown = document.querySelector(".playerTwo");
+const player1Shown = document.querySelector(".playerOneShown");
+const player2Shown = document.querySelector(".playerTwoShown");
+const atWarOne =document.querySelector(".atWarPlayerOne");
+const atWarTwo =document.querySelector(".atWarPlayerTwo");
 
 
 
@@ -49,11 +51,11 @@ const Player = function({name}={}){
     this.hand = [];
 }
 
-const ShownCards = function ({}){
-    this.displayvalue = displayvalue;
-    this.color = color;
-    this.value = value;
-}
+// const ShownCards = function ({}){
+//     this.displayvalue = displayvalue;
+//     this.color = color;
+//     this.value = value;
+// }
 
 play.addEventListener('click', () =>{
 console.log(gameOver,'playOn!!!!' ,gameOn);
@@ -86,15 +88,30 @@ function startGame(){
     console.log(this.deck);
 
     function splitDeck(){
+        // for(i=0; i<52; i++){
+        //     if((i+2)%2){
+        //     player1Deck.push(deck.cards[i]);
+        //     }
+        //     if(!(i+2)%2){
+        //     player2Deck.push(deck.cards[i]); 
+        //     } 
+           
+        // }
+        player1Deck = deck.cards.slice(0,26);
+        player2Deck = deck.cards.slice(26-52);
 
-    player1Deck = deck.cards.slice(0,26);
-    player2Deck = deck.cards.slice(26-52);
+        return player1Deck, player2Deck
+
+
+   
     }
+
     splitDeck()
 
     console.log(deck , player1Deck, player2Deck)
 
     gameOver= false;
+    gameOn = true;
 
 }
 
@@ -144,12 +161,16 @@ function flipCard(){
     if(player1Deck.length < 1){
         gameOver = true;
         gameOn = false;
-        text.innerHtml = `GameOver player ${this.player2.name} Winner`;
+        text.innerHTML = `GameOver ${this.player2.name} is the Winner`;
+        playerOneDeck.innerText = 0;
+        playerTwoDeck.innerText = 52;
         return gameOn, gameOver;
     }else  if(player2Deck.length < 1){
         gameOver = true;
         gameOn = false;
-        text.innerHtml = `GameOver player ${this.player1.name} Winner`;
+        text.innerHTML = `GameOver ${this.player1.name} is the Winner`;
+        playerOneDeck.innerText = 52;
+        playerTwoDeck.innerText = 0;
         return gameOn, gameOver;
     }
 
@@ -159,6 +180,10 @@ function flipCard(){
     playerOneDeck.innerText = player1Deck.length;
     playerTwoDeck.innerText = player2Deck.length;
     console.log(this.player1.hand, this.player2.hand)
+
+    player2Shown.innerText=`${shownCards(this.player2.hand)[0]}`;
+    player1Shown.innerText=`${shownCards(this.player1.hand)[0]}`;
+    // player1Shown.appendChild(shownCards1.getHTML())
 
     handWinner();
     return this.player1.hand, this.player2.hand;
@@ -185,12 +210,16 @@ function handWinner(){
                 if(player1Deck.length < 4){
                     gameOver = true;
                     gameOn = false;
-                    text.innerHtml = `GameOver player ${this.player2.name} Winner`;
+                    text.innerHTML = `GameOver player ${this.player2.name} Winner`;
+                    playerOneDeck.innerText = 0;
+                    playerTwoDeck.innerText = 52;
                     return gameOn, gameOver;
                 }else  if(player2Deck.length < 4){
                     gameOver = true;
                     gameOn = false;
-                    text.innerHtml = `GameOver player ${this.player1.name} Winner`;
+                    text.innerHTML = `GameOver player ${this.player1.name} Winner`;
+                    playerOneDeck.innerText = 52;
+                    playerTwoDeck.innerText = 0;
                     return gameOn, gameOver;
                 }
                 else {
@@ -211,6 +240,10 @@ function deckStage(){
     staged = staged.flat(2);
     player1Deck.splice(0,pulledCards);
     player2Deck.splice(0, pulledCards);
+    if(staged.length>2){
+        atWarOne.innerText=`${staged.length/2}`;
+        atWarTwo.innerText=`${staged.length/2}`;
+    }
 
     //staged = staged.flat();
 
@@ -227,20 +260,25 @@ function cleanBoard(){
 
 }
 
-// class shown{
+ class ShownCards{
+    constructor(displayvalue,color,value){
+        this.displayvalue= displayvalue;
+        this.color=color;
+        this.value=value;
+    }
 
 //     shownCards()
 
 
-//     getHTML() {
-//         const shownDiv = document.createElement("div")
-//         shownDiv.innerText = this.color
-//         shownDiv.classList.add("showncard", this.color)
-//         shownDiv.dataset.value = shownCards[0] , shownCards[1]
-//         return shownDiv
+    addDiv() {
+        const shownDiv = document.createElement("div")
+        shownDiv.innerText = 'red';
+        shownDiv.classList.add("showncard", this.color)
+        shownDiv.dataset.value = ` get`
+        return shownDiv
 
-//     }
-// }
+    }
+ }
 
 // {/* <div cards-open class="shown" ></div>
 // <div class="shownCard " data-value="10 ♠︎"></div> */}
