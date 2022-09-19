@@ -49,6 +49,12 @@ const Player = function({name}={}){
     this.hand = [];
 }
 
+const ShownCards = function ({}){
+    this.displayvalue = displayvalue;
+    this.color = color;
+    this.value = value;
+}
+
 play.addEventListener('click', () =>{
 console.log(gameOver,'playOn!!!!' ,gameOn);
    if(gameOver) {
@@ -134,26 +140,25 @@ function shownCards(num){
 function flipCard(){
     gameOn = true;
     console.log(pulledCards);
+
     if(player1Deck.length < 1){
-        gameOver=true;
-        gameOn=false;
-        text.innerHTML= `GAMEOVER  ${this.player2.name}  "Wins the Game!"`;
-    } 
-    if(player2Deck.lengh < 1){
-        gameOver=true;
-        gameOn=false;
-        text.innerHTML= `GAMEOVER  ${this.player1.name}  "Wins the Game!"`;
+        gameOver = true;
+        gameOn = false;
+        text.innerHtml = `GameOver player ${this.player2.name} Winner`;
+        return gameOn, gameOver;
+    }else  if(player2Deck.length < 1){
+        gameOver = true;
+        gameOn = false;
+        text.innerHtml = `GameOver player ${this.player1.name} Winner`;
+        return gameOn, gameOver;
     }
 
     this.player1.hand = player1Deck[pulledCards-1];
     this.player2.hand = player2Deck[pulledCards-1];
-   let N = player2Deck.length;
+    let N = player2Deck.length;
     playerOneDeck.innerText = player1Deck.length;
     playerTwoDeck.innerText = player2Deck.length;
-    // console.log(this.player1.hand, this.player2.hand);
-    let TR1 = this.player1.hand;
-    player1Shown.appendChild(getHTML(TR1));
-    player2Shown.appendChild(getHTML());
+    console.log(this.player1.hand, this.player2.hand)
 
     handWinner();
     return this.player1.hand, this.player2.hand;
@@ -162,32 +167,37 @@ function flipCard(){
 
 function handWinner(){
     if(shownCards(this.player1.hand)[1]>shownCards(this.player2.hand)[1] ){
-        text.innerHTML =`${this.player1.name} + "Wins the hand!"`;
+        text.innerHTML =`${this.player1.name} Wins the hand!`;
         player1Deck.push(staged);
         player1Deck = player1Deck.flat(2);
         staged= [];
         pulledCards = 1;
         
     } else if(shownCards(this.player2.hand)[1]>shownCards(this.player1.hand)[1]){
-        text.innerHTML = `${this.player2.name} + "Wins the hand!"`;
+        text.innerHTML = `${this.player2.name} Wins the hand! `;
         player2Deck.push(staged);
         player2Deck = player2Deck.flat(2);
         staged = [];
         pulledCards = 1;
     } else {
-        text.innerHtml = "CARDS WAR!!!!";
-        if(player1Deck.length < 4){
-            gameOver=true;
-            gameOn=false;
-            text.innerHTML= `GAMEOVER + ${this.player2.name} + "Wins the Game!"`;
-        } else if(player2Deck.lengh < 4){
-            gameOver=true;
-            gameOn=false;
-            text.innerHTML= `GAMEOVER + ${this.player1.name} + "Wins the Game!"`;
-        } else { pulledCards = 4;
-
-        }
-    }
+                text.innerHTML =`CARDS WAR!!!!`;
+                console.log("start war");
+                if(player1Deck.length < 4){
+                    gameOver = true;
+                    gameOn = false;
+                    text.innerHtml = `GameOver player ${this.player2.name} Winner`;
+                    return gameOn, gameOver;
+                }else  if(player2Deck.length < 4){
+                    gameOver = true;
+                    gameOn = false;
+                    text.innerHtml = `GameOver player ${this.player1.name} Winner`;
+                    return gameOn, gameOver;
+                }
+                else {
+                pulledCards = 4;
+                }
+            }
+    
     return player1Deck, player2Deck;
 
 }
@@ -198,6 +208,7 @@ function deckStage(){
     console.log(staged)
     staged.push(player2Deck.slice(0, pulledCards));
     console.log(staged)
+    staged = staged.flat(2);
     player1Deck.splice(0,pulledCards);
     player2Deck.splice(0, pulledCards);
 
@@ -213,25 +224,23 @@ function deckStage(){
 
 function cleanBoard(){
     deckStage();
-    
-
 
 }
 
 // class shown{
 
-//      //shownCards()
+//     shownCards()
 
 
-//     function getHTML(){
+//     getHTML() {
 //         const shownDiv = document.createElement("div")
-//         shownDiv.innerText = shownCards[1]
-//         shownDiv.classList.add("showncard")
+//         shownDiv.innerText = this.color
+//         shownDiv.classList.add("showncard", this.color)
 //         shownDiv.dataset.value = shownCards[0] , shownCards[1]
 //         return shownDiv
 
 //     }
-// // }
+// }
 
 // {/* <div cards-open class="shown" ></div>
 // <div class="shownCard " data-value="10 ♠︎"></div> */}
