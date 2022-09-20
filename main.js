@@ -241,8 +241,11 @@ function deckStage(){
     player1Deck.splice(0,pulledCards);
     player2Deck.splice(0, pulledCards);
     if(staged.length>2){
-        atWarOne.innerText=`${staged.length/2}`;
-        atWarTwo.innerText=`${staged.length/2}`;
+        atWarOne.innerText=`${staged.length/2-1}`;
+        atWarTwo.innerText=`${staged.length/2-1}`;
+    }else {
+        atWarOne.innerText=``;
+        atWarTwo.innerText=``;
     }
 
     //staged = staged.flat();
