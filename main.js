@@ -181,8 +181,8 @@ function flipCard(){
     playerTwoDeck.innerText = player2Deck.length;
     console.log(this.player1.hand, this.player2.hand)
 
-    player2Shown.innerText=`${shownCards(this.player2.hand)[0]}`;
-    player1Shown.innerText=`${shownCards(this.player1.hand)[0]}`;
+    player2Shown.innerText=`${shownCards(this.player2.hand)[0][0]} ${shownCards(this.player2.hand)[0][1]}`;
+    player1Shown.innerText=`${shownCards(this.player1.hand)[0][0]} ${shownCards(this.player1.hand)[0][1]}`;
     // player1Shown.appendChild(shownCards1.getHTML())
 
     handWinner();
